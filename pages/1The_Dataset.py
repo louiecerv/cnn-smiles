@@ -41,7 +41,7 @@ def app():
     or make predictions."""
     st.write(text)
     # Create the text area in the sidebar with a key
-    text_area = sidebar.text_area("", key="text_area", value="")
+    text_area = st.sidebar.text_area("", key="text_area", value="")
 
     progress_bar = st.progress(0, text="Loading the images, please wait...")
 
