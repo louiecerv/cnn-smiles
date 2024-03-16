@@ -172,9 +172,22 @@ class CustomCallback(tf.keras.callbacks.Callback):
         # Get the current loss and accuracy metrics
         loss = logs['loss']
         accuracy = logs['accuracy']
-        
+
+        # Additional metrics you want to display (replace with your metrics)
+        learning_rate = self.model.optimizer.learning_rate  # Assuming you use an optimizer with learning rate
+        other_metric = ... # Replace with your custom metric calculation
+
         # Update the Streamlit interface with the current epoch's output
-        st.write(f"Epoch {epoch}: loss = {loss:.4f}, accuracy = {accuracy:.4f}")
+        st.write(f"Epoch {epoch}:")
+        st.write(f"- loss = {loss:.4f}")
+        st.write(f"- accuracy = {accuracy:.4f}")
+        st.write(f"- learning rate = {learning_rate:.6f}")  # Display learning rate with more precision
+        st.write(f"- other metric = {other_metric:.4f}")  # Display other metric
+
+        # Example: adding a progress bar
+        progress = st.progress(100)  # Assuming 100 epochs for demonstration
+        progress.update(epoch + 1)  # Update progress bar for each epoch
+
 
 #run the app
 if __name__ == "__main__":
