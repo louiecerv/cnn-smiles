@@ -168,12 +168,6 @@ def plot_images(images, labels):
 
 # Define a custom callback function to update the Streamlit interface
 class CustomCallback(tf.keras.callbacks.Callback):
-    def on_epoch_begin(self, epoch, logs=None):
-        st.write("Epoch: {}".format(epoch))
-        for key, value in logs.items():
-            st.write("{}: {}".format(key, value))
-        st.empty()  # Clear the spinner
-
     def on_epoch_end(self, epoch, logs=None):
         # Get the current loss and accuracy metrics
         loss = logs['loss']
