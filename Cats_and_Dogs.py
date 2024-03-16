@@ -51,42 +51,14 @@ def app():
     st.image('cat_or_dog.jpg', caption='Cat or Dog Image Classification')
 
     text = """
-    This Streamlit application utilizes a pre-existing dataset called CIFAR-10 
-    for image classification using a Convolutional Neural Network (CNN).
-    Data Source:
-    The application relies on the CIFAR-10 dataset, a well-known benchmark 
-    dataset for image classification tasks.
-    This dataset is publicly available and can be downloaded directly within 
-    the application code using TensorFlow's datasets.cifar10.load_data() function.
-    Data Description:
-    CIFAR-10 consists of 60,000 color images in 32x32 pixel resolution.
-    
-    The images are categorized into 10 mutually exclusive classes:
-    airplane
-    automobile
-    bird
-    cat
-    deer
-    dog
-    frog
-    horse
-    ship
-    truck
-    The data is split into 50,000 training images and 10,000 testing images.
-    This split allows the CNN model to learn from the training data and evaluate 
-    its performance on unseen data (testing data).
-    
-    Data Preprocessing (performed within the application):
-    The application performs minimal preprocessing on the data:
-    Normalization: Pixel values are typically normalized to a range between 0 and 1 
-    for better training efficiency.
-    Data Used in the App:
-    
-    The application utilizes the following data from CIFAR-10:
-    Training images: Used to train the CNN model to recognize patterns and features.
-    Training labels: These labels correspond to the class categories of each training image.
-    Test images: Used to evaluate the trained model's performance on unseen data.
-    Test labels: Labels corresponding to the classes of the test images.    
+This Streamlit app demonstrates a binary image classifier for cats and dogs 
+using a Convolutional Neural Network (CNN). The CNN is trained on a balanced 
+dataset of 4,000 images, containing 2,000 cat and 2,000 dog images. The app leverages 
+Streamlit's capabilities to create a user-friendly interface for image 
+uploading and classification. Upon uploading an image, the app pre-processes it 
+(resizing, normalization) and feeds it through the trained CNN model. 
+The model's output is then interpreted to predict whether the image contains 
+a cat or a dog.
     """
     st.write(text)
     
