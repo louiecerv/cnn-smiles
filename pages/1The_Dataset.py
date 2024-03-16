@@ -24,9 +24,6 @@ def app():
     if "test_set" not in st.session_state:
         st.session_state.test_set = []
 
-    if "epoch_result" not in st.session_state:
-        st.session_state.epoch_result = ""
-        
     text = """
     A convolutional neural network (CNN) is a type of artificial intelligence especially
     good at processing images and videos.  Unlike other neural networks, CNNs don't need 
@@ -129,9 +126,7 @@ def app():
     )
 
     if st.button('Start Training'):
-        # Create the text area in the sidebar with a key
-        text_area = st.sidebar.text_area("", key="text_area", value=st.session_state.epoch_result)
-
+ 
         progress_bar = st.progress(0, text="Training the model please wait...")
         # Train the model
         batch_size = 64
@@ -181,11 +176,8 @@ class CustomCallback(tf.keras.callbacks.Callback):
         accuracy = logs['accuracy']
         
         # Update the Streamlit interface with the current epoch's output
-        update_text(f"Epoch {epoch}: loss = {loss:.4f}, accuracy = {accuracy:.4f}")
+        st.sidebar.text(f"Epoch {epoch}: loss = {loss:.4f}, accuracy = {accuracy:.4f}")
 
-# Function to update the text area
-def update_text(new_text):
-    st.session_state["epoch_result"] = new_text
 
 #run the app
 if __name__ == "__main__":
