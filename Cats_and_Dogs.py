@@ -14,9 +14,6 @@ def app():
     if "y" not in st.session_state: 
         st.session_state.y = []
 
-    if "scaler" not in st.session_state:
-        st.session_state["scaler"] = StandardScaler()
-
     if "model" not in st.session_state:
         st.session_state.model = []
 
