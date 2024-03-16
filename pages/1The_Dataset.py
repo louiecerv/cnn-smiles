@@ -6,23 +6,70 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import tensorflow as tf
 import matplotlib.pyplot as plt
-import tensorflow as tf
 from tensorflow import keras
-from tensorflow.keras import datasets, layers, models
-from tensorflow.keras.datasets import cifar10
+from tensorflow.keras import layers
+from tensorflow.keras.preprocessing.image import ImageDataGenerator
 
 import time
 
 # Define the Streamlit app
 def app():
 
+    if "classifier" not in st.session_state:
+        st.session_state.classifier = []
+
+    if "training_set" not in st.session_state:
+        st.session_state.training_set = []
+    
+    if "test_set" not in st.session_state:
+        st.session_state.test_set = []
+        
     text = """Replace with description of CIFAR 10"""
     st.write(text)
 
     progress_bar = st.progress(0, text="Loading the images, please wait...")
 
-    # Load the CIFAR-10 dataset
-    (train_images, train_labels), (test_images, test_labels) = datasets.cifar10.load_data()
+    # Initialize the CNN
+    classifier = keras.Sequential()
+
+    # Convolutional layer
+    classifier.add(layers.Conv2D(32, (3, 3), activation="relu", input_shape=(64, 64, 3)))  # Add input shape for RGB images
+
+    # Max pooling layer
+    classifier.add(layers.MaxPooling2D(pool_size=(2, 2)))
+
+    # Flatten layer
+    classifier.add(layers.Flatten())
+
+    # Dense layers
+    classifier.add(layers.Dense(units=128, activation="relu"))
+    classifier.add(layers.Dense(units=1, activation="sigmoid"))
+
+    # Compile the model
+    classifier.compile(optimizer="adam", loss="binary_crossentropy", metrics=["accuracy"])
+
+    st.session_state.classifier = classifier
+
+    # Data generators
+    train_datagen = ImageDataGenerator(rescale=1.0 / 255, shear_range=0.2, horizontal_flip=True)
+    test_datagen = ImageDataGenerator(rescale=1.0 / 255, shear_range=0.2, horizontal_flip=True)
+
+    # Data preparation
+    training_set = train_datagen.flow_from_directory(
+        "/dataset/training_set",
+        target_size=(64, 64),
+        batch_size=32,
+        class_mode="binary",
+    )
+    test_set = test_datagen.flow_from_directory(
+        "/dataset/test_set",
+        target_size=(64, 64),
+        batch_size=32,
+        class_mode="binary",
+    )
+
+    st.session_state.training_set = training_set
+    st.session_state.test_set = test_set
 
     # update the progress bar
     for i in range(100):
@@ -33,29 +80,12 @@ def app():
     # Progress bar reaches 100% after the loop completes
     st.success("Image dataset loading completed!") 
 
-    # Create the figure and a grid of subplots
-    fig, axes = plt.subplots(nrows=5, ncols=5, figsize=(6, 8))
+    # Get the data for the first 25 images in training set
+    train_data = next(training_set)
+    train_images, train_labels = train_data[0][0:24], train_data[1][0:24]  # Get first 25 images and labels
 
-    # display images starting with index 500
-    start_index = 500
-    # Iterate through the subplots and plot the images
-    for i, ax in enumerate(axes.flat):
-        # Turn off ticks and grid
-        ax.set_xticks([])
-        ax.set_yticks([])
-        ax.grid(False)
-
-        # Display the image
-        ax.imshow(train_images[start_index + i], cmap=plt.cm.binary)
-        # Add the image label
-        ax.set_xlabel(train_labels[i][0])
-
-    # Show the plot
-    plt.tight_layout()  # Adjust spacing between subplots
-    st.pyplot(fig)
-
-    # Normalize pixel values to be between 0 and 1
-    train_images, test_images = train_images / 255.0, test_images / 255.0
+    # Plot the training set images
+    plot_images(train_images, train_labels)
 
    # Define CNN parameters    
     st.sidebar.subheader('Set the CNN Parameters')
@@ -79,43 +109,23 @@ def app():
         value=3
     )
 
-    # Convert class labels to one-hot encoded vectors
-    num_classes = 10
-    train_labels = keras.utils.to_categorical(train_labels, num_classes)
-    test_labels = keras.utils.to_categorical(test_labels, num_classes)
-
-    # Define the CNN architecture
-    model = keras.Sequential(
-        [
-            layers.Conv2D(32, (3, 3), activation="relu", input_shape=(32, 32, 3)),
-            layers.MaxPooling2D(pool_size=(2, 2)),
-            layers.Conv2D(64, (3, 3), activation="relu"),
-            layers.MaxPooling2D(pool_size=(2, 2)),
-            layers.Conv2D(128, (3, 3), activation="relu"),
-            layers.Flatten(),
-            layers.Dense(128, activation="relu"),
-            layers.Dense(num_classes, activation="softmax"),
-        ]
-    )
-
-    # Compile the model
-    model.compile(
-        loss="categorical_crossentropy",
-        optimizer="adam",
-        metrics=["accuracy"],
-    )
-
     if st.button('Start Training'):
         progress_bar = st.progress(0, text="Training the model please wait...")
         # Train the model
         batch_size = 64
+        training_set = st.session_state.training_set
+        test_set = st.session_state.test_set
+
+        # Train the model
+        classifier.fit(
+            training_set,
+            epochs=2,
+            validation_data=test_set,
+            steps_per_epoch=4,
+            validation_steps=10,
+            callbacks=[CustomCallback()]
+        )
         
-        model.fit(train_images, train_labels, batch_size=batch_size, epochs=epochs, 
-                  validation_data=(test_images, test_labels), callbacks=[CustomCallback()])
-
-        #model.fit(train_images, train_labels, batch_size=batch_size, 
-            #epochs=epochs, validation_data=(test_images, test_labels))
-
         # update the progress bar
         for i in range(100):
             # Update progress bar value
@@ -125,6 +135,21 @@ def app():
         # Progress bar reaches 100% after the loop completes
         st.success("Model training completed!") 
         st.write("Use the sidebar to open the Performance page.")
+
+# Define a function to plot images
+def plot_images(images, labels):
+    fig, axs = plt.subplots(5, 5, figsize=(10, 6))  # Create a figure with subplots
+
+    # Flatten the axes for easier iteration
+    axs = axs.flatten()
+
+    for i, (image, label) in enumerate(zip(images, labels)):
+    axs[i].imshow(image)  # Use ax for imshow on each subplot
+    axs[i].set_title(f"Class: {label}")  # Use ax.set_title for title
+    axs[i].axis("off")  # Use ax.axis for turning off axis
+
+    plt.tight_layout()  # Adjust spacing between subplots
+    st.pyplot(fig)
 
 # Define a custom callback function to update the Streamlit interface
 class CustomCallback(tf.keras.callbacks.Callback):
