@@ -168,20 +168,23 @@ def plot_images(images, labels):
 
 # Define a custom callback function to update the Streamlit interface
 class CustomCallback(tf.keras.callbacks.Callback):
+    def on_epoch_begin(self, epoch, logs=None):
+        with st.spinner("Epoch {} starting...".format(epoch)):
+            st.write("Epoch: {}".format(epoch))
+            for key, value in logs.items():
+                st.write("{}: {}".format(key, value))
+            st.empty()  # Clear the spinner
+            
     def on_epoch_end(self, epoch, logs=None):
         # Get the current loss and accuracy metrics
         loss = logs['loss']
         accuracy = logs['accuracy']
 
-        # Additional metrics you want to display (replace with your metrics)
-        learning_rate = self.model.optimizer.learning_rate  # Assuming you use an optimizer with learning rate
-
         # Update the Streamlit interface with the current epoch's output
         st.write(f"Epoch {epoch}:")
         st.write(f"- loss = {loss:.4f}")
         st.write(f"- accuracy = {accuracy:.4f}")
-        st.write(f"- learning rate = {learning_rate:.6f}")  # Display learning rate with more precision
-
+ 
 
 #run the app
 if __name__ == "__main__":
