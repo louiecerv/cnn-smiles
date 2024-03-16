@@ -11,7 +11,7 @@ import time
 def app():
     classifier = st.session_state.classifier
     training_set = st.session_state.training_set
-    
+
     st.subheader('Testing the Performance of the CNN Classification Model')
     text = """We test our trained model by presenting it with a classification task."""
     st.write(text)
@@ -25,9 +25,9 @@ def app():
         training_set.class_indices
 
         if result[0][0]==0:
-            prediction = 'dog'
-        else:
             prediction = 'cat'
+        else:
+            prediction = 'dog'
 
         st.subheader('CNN model says the image is a ' + prediction)
  
