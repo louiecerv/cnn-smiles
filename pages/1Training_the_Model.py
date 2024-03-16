@@ -96,6 +96,7 @@ def app():
     # Progress bar reaches 100% after the loop completes
     st.success("Image dataset loading completed!") 
 
+    st.subheader("Sample Training Images")
     # Get the data for the first 25 images in training set
     train_data = next(training_set)
     train_images, train_labels = train_data[0][0:25], train_data[1][0:25]  # Get first 25 images and labels
