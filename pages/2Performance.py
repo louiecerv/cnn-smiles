@@ -9,27 +9,37 @@ import time
 
 # Define the Streamlit app
 def app():
-    classifier = st.session_state.classifier
-    training_set = st.session_state.training_set
+
 
     st.subheader('Testing the Performance of the CNN Classification Model')
     text = """We test our trained model by presenting it with a classification task."""
     st.write(text)
     
-    if st.button('Begin Test'):
-        st.image('dataset/single_prediction/cat_or_dog_1.jpg', caption='Cat or Dog Test Image 1')
-        test_image = image.load_img('dataset/single_prediction/cat_or_dog_1.jpg', target_size=(64, 64))
-        test_image = image.img_to_array(test_image)
-        test_image = np.expand_dims(test_image, axis=0)
-        result = classifier.predict(test_image)
-        training_set.class_indices
+    if st.button('Test Image 1'):
+        present_image('dataset/single_prediction/cat_or_dog_1.jpg')
+    if st.button('Test Image 2'):
+        present_image('dataset/single_prediction/cat_or_dog_2.jpg')
+    if st.button('Test Image 3'):
+        present_image('dataset/single_prediction/2_dogs.jpg')
+    if st.button('Test Image 4'):
+        present_image('dataset/single_prediction/cat_and_dog.jpg')
 
-        if result[0][0]==0:
-            prediction = 'cat'
-        else:
-            prediction = 'dog'
+def present_image(imagefile):
+    classifier = st.session_state.classifier
+    training_set = st.session_state.training_set
+    st.image(imagefile, caption='Cat or Dog Test Image 1')
+    test_image = image.load_img(imagefile, target_size=(64, 64))
+    test_image = image.img_to_array(test_image)
+    test_image = np.expand_dims(test_image, axis=0)
+    result = classifier.predict(test_image)
+    training_set.class_indices
 
-        st.subheader('CNN model says the image is a ' + prediction)
+    if result[0][0]==0:
+        prediction = 'cat'
+    else:
+        prediction = 'dog'
+
+    st.subheader('CNN model says the image is a ' + prediction)
  
 
 
