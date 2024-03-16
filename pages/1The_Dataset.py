@@ -82,7 +82,7 @@ def app():
 
     # Get the data for the first 25 images in training set
     train_data = next(training_set)
-    train_images, train_labels = train_data[0][0:24], train_data[1][0:24]  # Get first 25 images and labels
+    train_images, train_labels = train_data[0][0:25], train_data[1][0:25]  # Get first 25 images and labels
 
     # Plot the training set images
     plot_images(train_images, train_labels)
