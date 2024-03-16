@@ -24,7 +24,7 @@ def app():
     if "test_set" not in st.session_state:
         st.session_state.test_set = []
 
-    with st.expander("CLick to display more info"):
+    with st.expander("Click to display more info"):
         text = """
         \nA convolutional neural network (CNN) is a type of artificial 
         intelligence especially good at processing images and videos.  
