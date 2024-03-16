@@ -40,8 +40,7 @@ def app():
     taking the outputs from the previous layers and using them to classify the image 
     or make predictions."""
     st.write(text)
-    # Create the text area in the sidebar with a key
-    text_area = st.sidebar.text_area("", key="text_area", value="")
+
 
     progress_bar = st.progress(0, text="Loading the images, please wait...")
 
@@ -127,6 +126,8 @@ def app():
     )
 
     if st.button('Start Training'):
+        # Create the text area in the sidebar with a key
+        text_area = st.sidebar.text_area("", key="text_area", value="")
         progress_bar = st.progress(0, text="Training the model please wait...")
         # Train the model
         batch_size = 64
