@@ -25,18 +25,19 @@ def app():
         st.session_state.test_set = []
 
     text = """
-    A convolutional neural network (CNN) is a type of artificial intelligence especially
-    good at processing images and videos.  Unlike other neural networks, CNNs don't need 
+    \nA convolutional neural network (CNN) is a type of artificial 
+    intelligence especially good at processing images and videos.  
+    Unlike other neural networks, CNNs don't need 
     images to be pre-processed by hand. Instead, they can learn to identify features 
     themselves through a process called convolution.
-    Layers: CNNs are built up of layers, including an input layer, convolutional 
+    \nLayers: CNNs are built up of layers, including an input layer, convolutional 
     layers, pooling layers, and fully-connected layers.
-    Convolutional layers: These layers use filters to identify patterns and features 
+    \nConvolutional layers: These layers use filters to identify patterns and features 
     within the image. Imagine a filter like a small magnifying glass that scans the image 
     for specific details.
-    Pooling layers: These layers reduce the complexity of the image by summarizing the 
+    \nPooling layers: These layers reduce the complexity of the image by summarizing the 
     information from the convolutional layers.
-    Fully-connected layers: These layers work similarly to regular neural networks, 
+    \nFully-connected layers: These layers work similarly to regular neural networks, 
     taking the outputs from the previous layers and using them to classify the image 
     or make predictions."""
     st.write(text)
