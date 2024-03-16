@@ -40,6 +40,8 @@ def app():
     taking the outputs from the previous layers and using them to classify the image 
     or make predictions."""
     st.write(text)
+    # Create the text area in the sidebar with a key
+    text_area = sidebar.text_area("", key="text_area", value="")
 
     progress_bar = st.progress(0, text="Loading the images, please wait...")
 
@@ -174,8 +176,11 @@ class CustomCallback(tf.keras.callbacks.Callback):
         accuracy = logs['accuracy']
         
         # Update the Streamlit interface with the current epoch's output
-        st.sidebar.write(f"Epoch {epoch}: loss = {loss:.4f}, accuracy = {accuracy:.4f}")
+        update_text(f"Epoch {epoch}: loss = {loss:.4f}, accuracy = {accuracy:.4f}")
 
+# Function to update the text area
+def update_text(new_text):
+    st.session_state["text_area"] = new_text
 
 #run the app
 if __name__ == "__main__":
