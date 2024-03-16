@@ -176,7 +176,7 @@ class CustomCallback(tf.keras.callbacks.Callback):
         accuracy = logs['accuracy']
         
         # Update the Streamlit interface with the current epoch's output
-        st.sidebar.text(f"Epoch {epoch}: loss = {loss:.4f}, accuracy = {accuracy:.4f}")
+        st.text(f"Epoch {epoch}: loss = {loss:.4f}, accuracy = {accuracy:.4f}")
 
 
 #run the app
