@@ -24,23 +24,24 @@ def app():
     if "test_set" not in st.session_state:
         st.session_state.test_set = []
 
-    text = """
-    \nA convolutional neural network (CNN) is a type of artificial 
-    intelligence especially good at processing images and videos.  
-    Unlike other neural networks, CNNs don't need 
-    images to be pre-processed by hand. Instead, they can learn to identify features 
-    themselves through a process called convolution.
-    \nLayers: CNNs are built up of layers, including an input layer, convolutional 
-    layers, pooling layers, and fully-connected layers.
-    \nConvolutional layers: These layers use filters to identify patterns and features 
-    within the image. Imagine a filter like a small magnifying glass that scans the image 
-    for specific details.
-    \nPooling layers: These layers reduce the complexity of the image by summarizing the 
-    information from the convolutional layers.
-    \nFully-connected layers: These layers work similarly to regular neural networks, 
-    taking the outputs from the previous layers and using them to classify the image 
-    or make predictions."""
-    st.write(text)
+    with st.expander("CLick to display more info"):
+        text = """
+        \nA convolutional neural network (CNN) is a type of artificial 
+        intelligence especially good at processing images and videos.  
+        Unlike other neural networks, CNNs don't need 
+        images to be pre-processed by hand. Instead, they can learn to identify features 
+        themselves through a process called convolution.
+        \nLayers: CNNs are built up of layers, including an input layer, convolutional 
+        layers, pooling layers, and fully-connected layers.
+        \nConvolutional layers: These layers use filters to identify patterns and features 
+        within the image. Imagine a filter like a small magnifying glass that scans the image 
+        for specific details.
+        \nPooling layers: These layers reduce the complexity of the image by summarizing the 
+        information from the convolutional layers.
+        \nFully-connected layers: These layers work similarly to regular neural networks, 
+        taking the outputs from the previous layers and using them to classify the image 
+        or make predictions."""
+        st.write(text)
 
 
     progress_bar = st.progress(0, text="Loading the images, please wait...")
@@ -126,6 +127,7 @@ def app():
         value=50,
         step=5
     )
+
     with st.expander("CLick to display guide on how to select parameters"):
         text = """ReLU (Rectified Linear Unit): This is the most common activation function used 
         in convolutional neural networks (CNNs) for hidden layers. It outputs the input 
