@@ -48,7 +48,7 @@ def app():
     West Visayas State University"""
     st.text(text)
 
-    st.image('cifar10.png', caption="CIFAR-10 Dataset")
+    st.image('cat_or_dog.jpg', caption='Cat or Dog Image Classification')
 
     text = """
     This Streamlit application utilizes a pre-existing dataset called CIFAR-10 
