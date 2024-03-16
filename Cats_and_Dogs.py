@@ -2,10 +2,7 @@
 import numpy as np
 import pandas as pd
 import streamlit as st
-import altair as alt
-import matplotlib.pyplot as plt
-import seaborn as sns
-from sklearn.preprocessing import StandardScaler
+
 
 import time
 
@@ -41,7 +38,7 @@ def app():
     if "n_clusters" not in st.session_state:
         st.session_state.n_clusters = 4
 
-    text = """Convolutional Neural Network on the CIFAR-10 Dataset"""
+    text = """Convolutional Neural Network Image Classification Task"""
     st.subheader(text)
 
     text = """Louie F. Cervantes, M. Eng. (Information Engineering) \n
