@@ -119,7 +119,7 @@ def app():
         # Train the model
         classifier.fit(
             training_set,
-            epochs=2,
+            epochs=epochs,
             validation_data=test_set,
             steps_per_epoch=4,
             validation_steps=10,
