@@ -63,12 +63,14 @@ def app():
         target_size=(32, 32),
         batch_size=32,
         class_mode="binary",
+        color_mode="grayscale"  # Add this line
     )
     test_set = test_datagen.flow_from_directory(
         "dataset/test_set",
         target_size=(32, 32),
         batch_size=32,
         class_mode="binary",
+        color_mode="grayscale"  # Add this line
     )
 
     st.session_state.training_set = training_set
@@ -123,7 +125,7 @@ def app():
     classifier = keras.Sequential()
 
     # Convolutional layer
-    classifier.add(layers.Conv2D(n_layers, (3, 3), activation=h_activation, input_shape=(32, 32, 3)))  # Add input shape for RGB images
+    classifier.add(layers.Conv2D(n_layers, (3, 3), activation=h_activation, input_shape=(32, 32, 1)))  # Add input shape for RGB images
 
     # Max pooling layer
     classifier.add(layers.MaxPooling2D(pool_size=(2, 2)))
