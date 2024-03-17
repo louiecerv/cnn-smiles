@@ -33,7 +33,7 @@ def app():
     if "n_clusters" not in st.session_state:
         st.session_state.n_clusters = 4
 
-    text = """Convolutional Neural Network Image Classifier"""
+    text = """Convolutional Neural Network Image Classifier on the Smile/No Smile Dataset"""
     st.subheader(text)
 
     text = """Louie F. Cervantes, M. Eng. (Information Engineering) \n
