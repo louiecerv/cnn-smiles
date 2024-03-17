@@ -96,7 +96,7 @@ def app():
     
    # Define CNN parameters    
     st.sidebar.subheader('Set the CNN Parameters')
-    options = ["relu", "leakyrelu", "tanh", "elu", "selu"]
+    options = ["relu", "tanh", "elu", "selu"]
     h_activation = st.sidebar.selectbox('Activation function for the hidden layer:', options)
 
     options = ["sigmoid", "softmax"]
