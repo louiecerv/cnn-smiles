@@ -5,7 +5,6 @@ import streamlit as st
 import matplotlib.pyplot as plt
 import seaborn as sns
 from tensorflow.keras.preprocessing import image
-from PIL import Image
 
 # Define the Streamlit app
 def app():
@@ -27,10 +26,6 @@ def app():
     # Create a file uploader widget
     uploaded_file = st.file_uploader("Choose an image", type=["jpg", "jpeg", "png"])
     if uploaded_file is not None:
-        # Read the image file
-        image = Image.open(uploaded_file)
-        # Display the image
-        #st.image(image, caption="Uploaded Image")
         present_image(uploaded_file)
 
 def present_image(imagefile):
