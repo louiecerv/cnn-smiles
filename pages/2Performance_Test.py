@@ -49,7 +49,7 @@ def present_image(imagefile):
     else:
         prediction = 'dog'
 
-    st.subheader('CNN model says the image is a ' + prediction)
+    st.subheader('CNN says the image is of a ' + prediction)
  
 
 
