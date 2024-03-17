@@ -136,7 +136,7 @@ def app():
     classifier.add(layers.Dense(units=1, activation=o_activation))
 
     # Compile the model
-    classifier.compile(optimizer="adam", loss="binary_crossentropy", metrics=["accuracy"])
+    classifier.compile(optimizer=optimizer, loss="binary_crossentropy", metrics=["accuracy"])
 
     st.session_state.classifier = classifier
 
