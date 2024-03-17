@@ -43,7 +43,7 @@ def app():
     West Visayas State University"""
     st.text(text)
 
-    st.image('Smiles.jpg', caption='The Smiles Dataset')
+    st.image('smiles.jpg', caption='The Smiles Dataset')
 
     text = """
     \nThis Streamlit application demonstrates a Convolutional Neural Network (CNN)
