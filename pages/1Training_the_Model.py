@@ -86,7 +86,7 @@ def app():
     st.success("Image dataset loading completed!") 
 
     st.subheader("Sample Training Images")
-    st.write("The following are 25 sample images randomly selected from both cats and dogs image dataset.")
+    st.write("The following are 25 sample images randomly selected from both classes: Smile and No Smile")
     # Get the data for the first 25 images in training set
     train_data = next(training_set)
     train_images, train_labels = train_data[0][0:25], train_data[1][0:25]  # Get first 25 images and labels
