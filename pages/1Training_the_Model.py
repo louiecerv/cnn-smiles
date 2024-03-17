@@ -123,8 +123,8 @@ def app():
     # Initialize the CNN
     classifier = keras.Sequential()
 
-    # Convolutional layer
-    classifier.add(layers.Conv2D(n_layers, (3, 3), activation=h_activation, input_shape=(32, 32, 1)))  # Add input shape for RGB images
+    # Convolutional layer (adjust for grayscale input)
+    classifier.add(layers.Conv2D(n_layers, (3, 3), activation=h_activation, input_shape=(32, 32, 1)))  # Input shape for grayscale images
 
     # Max pooling layer
     classifier.add(layers.MaxPooling2D(pool_size=(2, 2)))
@@ -140,6 +140,7 @@ def app():
     classifier.compile(optimizer=optimizer, loss="binary_crossentropy", metrics=["accuracy"])
 
     st.session_state.classifier = classifier
+
 
     with st.expander("CLick to display guide on how to select parameters"):
         text = """ReLU (Rectified Linear Unit): This is the most common activation function used 
