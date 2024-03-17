@@ -29,9 +29,8 @@ def app():
         if uploaded_file is not None:
             # Read the image file
             image = Image.open(uploaded_file)
-
             # Display the image
-            st.image(image, caption="Uploaded Image")
+            #st.image(image, caption="Uploaded Image")
             present_image(image)
 
 def present_image(imagefile):
