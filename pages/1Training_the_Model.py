@@ -118,13 +118,12 @@ def app():
         value=50,
         step=5
     )
-
-
+    
     # Initialize the CNN
     classifier = keras.Sequential()
 
-    # Convolutional layer (adjust for grayscale input)
-    classifier.add(layers.Conv2D(n_layers, (3, 3), activation=h_activation, input_shape=(32, 32, 1)))  # Input shape for grayscale images
+    # Convolutional layer
+    classifier.add(layers.Conv2D(n_layers, (3, 3), activation=h_activation, input_shape=(32, 32, 3)))  # Add input shape for RGB images
 
     # Max pooling layer
     classifier.add(layers.MaxPooling2D(pool_size=(2, 2)))
