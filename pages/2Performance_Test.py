@@ -14,15 +14,6 @@ def app():
     text = """We test our trained model by presenting it with a classification task."""
     st.write(text)
     
-    if st.button('Test Image 1'):
-        present_image('dataset/single_prediction/cat_or_dog_1.jpg')
-    if st.button('Test Image 2'):
-        present_image('dataset/single_prediction/cat_or_dog_2.jpg')
-    if st.button('Test Image 3'):
-        present_image('dataset/single_prediction/2_dogs.jpg')
-    if st.button('Test Image 4'):
-        present_image('dataset/single_prediction/cat_and_dog.jpg')
-
     # Create a file uploader widget
     uploaded_file = st.file_uploader("Choose an image", type=["jpg", "jpeg", "png"])
     if uploaded_file is not None:
