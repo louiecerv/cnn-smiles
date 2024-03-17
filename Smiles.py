@@ -43,17 +43,29 @@ def app():
     West Visayas State University"""
     st.text(text)
 
-    st.image('cat_or_dog.jpg', caption='Cat or Dog Image Classification')
+    st.image('Smiles.jpg', caption='The Smiles Dataset')
 
     text = """
-This Streamlit app demonstrates a binary image classifier for cats and dogs 
-using a Convolutional Neural Network (CNN). The CNN is trained on a balanced 
-dataset of 4,000 images, containing 2,000 cat and 2,000 dog images. The app leverages 
-Streamlit's capabilities to create a user-friendly interface for image 
-uploading and classification. Upon uploading an image, the app pre-processes it 
-(resizing, normalization) and feeds it through the trained CNN model. 
-The model's output is then interpreted to predict whether the image contains 
-a cat or a dog.
+    \nThis Streamlit application demonstrates a Convolutional Neural Network (CNN)
+    classifier for image recognition, specifically trained on a dataset of smiles. 
+    Users can interact with the app by uploading an image, and the CNN model will 
+    predict the presence or absence of a smile in the image.
+    \nTech Stack:
+    \nStreamlit: A Python library for creating web apps.
+    \nTensorFlow: Deep learning frameworks for building and training CNNs.
+    \nApp Functionality:
+    \nImage Upload: The app provides a user interface for uploading an image file.
+    \nCNN Inference: The image is passed through the trained CNN model, which 
+    generates predictions.
+    \nPrediction Display: The app displays the model's prediction on the presence 
+    or absence of a smile in the image. 
+    \nBenefits:
+    \nUser-friendly Interface: Streamlit simplifies web app development, making 
+    the CNN model accessible without coding knowledge.
+    \nInteractive Exploration: Users can experiment with different images 
+    and observe the model's performance.
+    \nEducational Tool: The app can be a valuable tool for understanding CNNs and 
+    their applications in image classification tasks.
     """
     st.write(text)
 
