@@ -33,7 +33,7 @@ def app():
     if "n_clusters" not in st.session_state:
         st.session_state.n_clusters = 4
 
-    text = """Convolutional Neural Network Image Classification Task"""
+    text = """Convolutional Neural Network Image Classifier"""
     st.subheader(text)
 
     text = """Louie F. Cervantes, M. Eng. (Information Engineering) \n
@@ -56,6 +56,13 @@ The model's output is then interpreted to predict whether the image contains
 a cat or a dog.
     """
     st.write(text)
+
+    with st.expander("How to use this App"):
+         text = """Step 1. Go to Training page. Set the parameters of the CNN click the button
+         to begin training.
+         \nStep 2.  Go to Performance Testing page and click the button to load the image
+         and get the model's output on the classification task.
+         \nYou can return to the training page to try other combinations of parameters."""
     
 #run the app
 if __name__ == "__main__":
