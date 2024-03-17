@@ -63,6 +63,7 @@ a cat or a dog.
          \nStep 2.  Go to Performance Testing page and click the button to load the image
          and get the model's output on the classification task.
          \nYou can return to the training page to try other combinations of parameters."""
+         st.write(text)
     
 #run the app
 if __name__ == "__main__":
