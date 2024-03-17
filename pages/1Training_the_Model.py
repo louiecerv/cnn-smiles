@@ -60,13 +60,13 @@ def app():
     # Data preparation
     training_set = train_datagen.flow_from_directory(
         "dataset/training_set",
-        target_size=(64, 64),
+        target_size=(32, 32),
         batch_size=32,
         class_mode="binary",
     )
     test_set = test_datagen.flow_from_directory(
         "dataset/test_set",
-        target_size=(64, 64),
+        target_size=(32, 32),
         batch_size=32,
         class_mode="binary",
     )
@@ -124,7 +124,7 @@ def app():
     classifier = keras.Sequential()
 
     # Convolutional layer
-    classifier.add(layers.Conv2D(n_layers, (3, 3), activation=h_activation, input_shape=(64, 64, 3)))  # Add input shape for RGB images
+    classifier.add(layers.Conv2D(n_layers, (3, 3), activation=h_activation, input_shape=(32, 32, 1)))  # Add input shape for RGB images
 
     # Max pooling layer
     classifier.add(layers.MaxPooling2D(pool_size=(2, 2)))
@@ -208,7 +208,7 @@ def app():
             time.sleep(0.01)
         # Progress bar reaches 100% after the loop completes
         st.success("Model training completed!") 
-        st.write("The model is now trained to tell dogs and cats apart. Use the sidebar to open the Performance Testing page.")
+        st.write("The model is now trained to tell if the picture has a smile or not.Use the sidebar to open the Performance Testing page.")
 
 # Define a function to plot images
 def plot_images(images, labels):
