@@ -31,7 +31,7 @@ def app():
 def present_image(imagefile):
     classifier = st.session_state.classifier
     training_set = st.session_state.training_set
-    st.image(imagefile, caption='Cat or Dog Test Image 1')
+    st.image(imagefile, caption='Smile or No Smile')
     test_image = image.load_img(imagefile, target_size=(32, 32), color_mode='grayscale')
     test_image = image.img_to_array(test_image)
     test_image = np.expand_dims(test_image, axis=0)
@@ -39,11 +39,11 @@ def present_image(imagefile):
     training_set.class_indices
 
     if result[0][0]==0:
-        prediction = 'cat'
+        prediction = 'No Smile'
     else:
-        prediction = 'dog'
+        prediction = 'Smile'
 
-    st.subheader('CNN says the image is of a ' + prediction)
+    st.subheader('CNN says the image is class ' + prediction)
  
 
 
