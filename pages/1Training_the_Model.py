@@ -26,6 +26,13 @@ def app():
 
     with st.expander("Click to display more info"):
         text = """
+        \n# --- Available activation functions for hidden layers ---
+        ReLU (Rectified Linear Unit): Most common default
+        LeakyReLU: Variant of ReLU to address "dying ReLU" issue
+        tanh (Hyperbolic Tangent): Squash values between -1 and 1
+        ELU (Exponential Linear Unit): Similar to ReLU, but smoother
+        SELU (Scaled ELU): Variant of ELU for self-normalizing networks
+
         \nA convolutional neural network (CNN) is a type of artificial 
         intelligence especially good at processing images and videos.  
         Unlike other neural networks, CNNs don't need 
@@ -45,27 +52,6 @@ def app():
 
 
     progress_bar = st.progress(0, text="Loading the images, please wait...")
-
-    # Initialize the CNN
-    classifier = keras.Sequential()
-
-    # Convolutional layer
-    classifier.add(layers.Conv2D(32, (3, 3), activation="relu", input_shape=(64, 64, 3)))  # Add input shape for RGB images
-
-    # Max pooling layer
-    classifier.add(layers.MaxPooling2D(pool_size=(2, 2)))
-
-    # Flatten layer
-    classifier.add(layers.Flatten())
-
-    # Dense layers
-    classifier.add(layers.Dense(units=128, activation="relu"))
-    classifier.add(layers.Dense(units=1, activation="sigmoid"))
-
-    # Compile the model
-    classifier.compile(optimizer="adam", loss="binary_crossentropy", metrics=["accuracy"])
-
-    st.session_state.classifier = classifier
 
     # Data generators
     train_datagen = ImageDataGenerator(rescale=1.0 / 255, shear_range=0.2, horizontal_flip=True)
@@ -104,20 +90,24 @@ def app():
 
     # Plot the training set images
     plot_images(train_images, train_labels)
-
+    
    # Define CNN parameters    
     st.sidebar.subheader('Set the CNN Parameters')
-    options = ["relu", "tanh", "logistic"]
-    activation = st.sidebar.selectbox('Select the activation function:', options)
+    options = ["relu", "leakyrelu", "tanh", "elu", "selu"]
+    h_activation = st.sidebar.selectbox('Activation function for the hidden layer:', options)
 
-    options = ["adam", "lbfgs", "sgd"]
+    options = ["sigmoid", "softmax"]
+    o_activation = st.sidebar.selectbox('Activation function for the output layer:', options)
+
+    options = ["adam", "adagrad", "sgd"]
     optimizer = st.sidebar.selectbox('Select the optimizer:', options)
 
-    hidden_layers = st.sidebar.slider(      
-        label="How many hidden layers? :",
-        min_value=5,
-        max_value=250,
-        value=10,  # Initial value
+    n_layers = st.sidebar.slider(      
+        label="Number of Neurons in the Convolutional Layer:",
+        min_value=16,
+        max_value=128,
+        value=32,  # Initial value
+        step=16
     )
 
     epochs = st.sidebar.slider(   
@@ -127,6 +117,28 @@ def app():
         value=50,
         step=5
     )
+
+
+    # Initialize the CNN
+    classifier = keras.Sequential()
+
+    # Convolutional layer
+    classifier.add(layers.Conv2D(n_layers, (3, 3), activation=h_activation, input_shape=(64, 64, 3)))  # Add input shape for RGB images
+
+    # Max pooling layer
+    classifier.add(layers.MaxPooling2D(pool_size=(2, 2)))
+
+    # Flatten layer
+    classifier.add(layers.Flatten())
+
+    # Dense layers
+    classifier.add(layers.Dense(units=128, activation="relu"))
+    classifier.add(layers.Dense(units=1, activation=o_activation))
+
+    # Compile the model
+    classifier.compile(optimizer="adam", loss="binary_crossentropy", metrics=["accuracy"])
+
+    st.session_state.classifier = classifier
 
     with st.expander("CLick to display guide on how to select parameters"):
         text = """ReLU (Rectified Linear Unit): This is the most common activation function used 
