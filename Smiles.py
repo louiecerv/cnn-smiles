@@ -51,20 +51,20 @@ def app():
     Users can interact with the app by uploading an image, and the CNN model will 
     predict the presence or absence of a smile in the image.
     \nTech Stack:
-    \nStreamlit: A Python library for creating web apps.
-    \nTensorFlow: Deep learning frameworks for building and training CNNs.
-    \nApp Functionality:
-    \nImage Upload: The app provides a user interface for uploading an image file.
-    \nCNN Inference: The image is passed through the trained CNN model, which 
+    Streamlit: A Python library for creating web apps.
+    TensorFlow: Deep learning frameworks for building and training CNNs.
+    App Functionality:
+    Image Upload: The app provides a user interface for uploading an image file.
+    CNN Inference: The image is passed through the trained CNN model, which 
     generates predictions.
-    \nPrediction Display: The app displays the model's prediction on the presence 
+    Prediction Display: The app displays the model's prediction on the presence 
     or absence of a smile in the image. 
-    \nBenefits:
+    Benefits:
     \nUser-friendly Interface: Streamlit simplifies web app development, making 
     the CNN model accessible without coding knowledge.
-    \nInteractive Exploration: Users can experiment with different images 
+    Interactive Exploration: Users can experiment with different images 
     and observe the model's performance.
-    \nEducational Tool: The app can be a valuable tool for understanding CNNs and 
+    Educational Tool: The app can be a valuable tool for understanding CNNs and 
     their applications in image classification tasks.
     """
     st.write(text)
