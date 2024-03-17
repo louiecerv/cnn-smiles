@@ -31,7 +31,7 @@ def app():
         image = Image.open(uploaded_file)
         # Display the image
         #st.image(image, caption="Uploaded Image")
-        present_image(image)
+        present_image(uploaded_file)
 
 def present_image(imagefile):
     classifier = st.session_state.classifier
