@@ -23,15 +23,15 @@ def app():
         present_image('dataset/single_prediction/2_dogs.jpg')
     if st.button('Test Image 4'):
         present_image('dataset/single_prediction/cat_and_dog.jpg')
-    if st.button("Upload Image"):
-        # Create a file uploader widget
-        uploaded_file = st.file_uploader("Choose an image", type=["jpg", "jpeg", "png"])
-        if uploaded_file is not None:
-            # Read the image file
-            image = Image.open(uploaded_file)
-            # Display the image
-            #st.image(image, caption="Uploaded Image")
-            present_image(image)
+
+# Create a file uploader widget
+uploaded_file = st.file_uploader("Choose an image", type=["jpg", "jpeg", "png"])
+if uploaded_file is not None:
+    # Read the image file
+    image = Image.open(uploaded_file)
+    # Display the image
+    #st.image(image, caption="Uploaded Image")
+    present_image(image)
 
 def present_image(imagefile):
     classifier = st.session_state.classifier
